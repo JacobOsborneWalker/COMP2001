@@ -22,5 +22,25 @@ conn_str = (
 )
 
 
-conn = pyodbc.connect(conn_str)
-cursor = conn.cursor()
+
+@app.route('/trails', methods=['GET'])
+def get_trails():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Hiking.Trails")
+    trails = [
+        {
+            "TrailID": row.TrailID,
+            "TrailName": row.TrailName,
+            "Difficulty": row.Difficulty,
+            "Location": row.Location,
+            "Length": row.Length,
+            "ElevationGain": row.ElevationGain,
+            "RouteType": row.RouteType,
+            "TrailSummary": row.TrailSummary,
+            "TrailDescription": row.TrailDescription
+        }
+        for row in cursor.fetchall()
+    ]
+    conn.close()
+    return jsonify(trails)
