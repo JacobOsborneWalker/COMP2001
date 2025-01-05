@@ -82,8 +82,8 @@ def update_trail(trail_id):
         trail.Trail_Expected_Time = data.get("Trail_Expected_Time", trail.Trail_Expected_Time)
         trail.Trail_Description = data.get("Trail_Description", trail.Trail_Description)
         db.session.commit()
-        return jsonify({"message": "Trail updated successfully!"})
-    return jsonify({"error": "Trail not found"}), 404
+        return jsonify({"message": "trial updated successfully!"})
+    return jsonify({"error": "trail not found"}), 404
 
 @app.route("/trail/<trail_id>", methods=["DELETE"])
 def delete_trail(trail_id):
@@ -92,7 +92,7 @@ def delete_trail(trail_id):
         db.session.delete(trail)
         db.session.commit()
         return jsonify({"message": "Trail deleted successfully!"})
-    return jsonify({"error": "Trail not found"}), 404
+    return jsonify({"error": "trial not found"}), 404
 
 # Run the application
 if __name__ == "__main__":
